@@ -1,0 +1,103 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  h2 {
+    padding-bottom: 5rem;
+  }
+  .meter-reader-home {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 400px; /* Fixed width */
+    margin: 0 auto; /* Center horizontally */
+    height: 100%;
+  }
+
+  .meter-reader-home h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .meter-reader-home label {
+    font-weight: bold;
+  }
+
+  .meter-reader-home input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .meter-reader-home button {
+    padding: 0.7rem 3rem;
+    background-color: #6612e6;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    transition: background-color 0.3s, font-size 0.3s, box-shadow 0.3s;
+  }
+
+  .meter-reader-home button:hover {
+    background-color: #3b1b75;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .meter-reader-home select,
+  .meter-reader-home input[type="date"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  input[type=text], select {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+  }
+  .customer-login input[type="text"]:focus {
+    border: 5px solid black;
+    outline: none;
+}
+.meter-reader-home select[name="{{ meter_reading_form.customer.name }}"],
+    .meter-reader-home input[type="date"],
+    .meter-reader-home input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .meter-reader-home select[name="{{ meter_reading_form.customer.name }}"]:focus,
+    .meter-reader-home input[type="date"]:focus,
+    .meter-reader-home input[type="text"]:focus {
+        box-shadow: 1px 6px 21px 0px rgba(120,36,150,0.75);
+        -webkit-box-shadow: 1px 6px 21px 0px rgba(120,36,150,0.75);
+        -moz-box-shadow: 1px 6px 21px 0px rgba(120,36,150,0.75);
+        outline: none;
+    }
+</style>
+
+<div class="meter-reader-home">
+  <h2>Meter Reader Home</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="{{ meter_reading_form.customer.id_for_label }}"
+      >Customer numbers:</label
+    >
+    <select name="{{ meter_reading_form.customer.name }}">
+      {% for customer in meter_reading_form.customer.field.queryset %}
+        <option value="{{ customer.pk }}">{{ customer.customer_number }}</option>
+      {% endfor %}
+    </select>
+    <label for="{{ meter_reading_form.date.id_for_label }}">Date:</label>
+    {{ meter_reading_form.date }}
+    <label for="{{ meter_reading_form.meter_reading.id_for_label }}"
+      >Meter Reading:</label
+    >
+    {{ meter_reading_form.meter_reading }}
+    <button type="submit">Submit</button>
+  </form>
+</div>
+{% endblock %}

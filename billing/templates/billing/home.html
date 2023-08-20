@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity Billing System</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgb(0,0,3);
+            background: linear-gradient(90deg, rgba(0,0,3,1) 0%, rgba(1,1,68,0.9192051820728291) 0%, rgba(50,0,50,1) 60%, rgba(37,0,75,0.8575805322128851) 100%);
+            color: white;
+            font-family: Arial, sans-serif;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .button {
+          padding: 1rem 1.2rem;
+          text-decoration: none;
+          background-color: #6612e6;
+          border: none;
+          color: white;
+          font-size: 1.5rem;
+          cursor: pointer;
+          border-radius: 0.3rem;
+          transition: background-color 0.3s, font-size 0.3s, box-shadow 0.3s;
+
+        }
+        
+        .button:hover {
+          background-color: #3b1b75;
+          box-shadow: 1px -1px 14px -1px rgba(108,220,255,0.97);
+          -webkit-box-shadow: 1px -1px 14px -1px rgba(108,220,255,0.97);
+          -moz-box-shadow: 1px -1px 14px -1px rgba(108,220,255,0.97);
+        }
+
+        .customer-list {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 0.3rem;
+            margin-top: 2rem;
+        }
+
+        .latest-meter-reading {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 0.3rem;
+            margin-top: 2rem;
+        }
+
+        .customer-list ol li{
+            margin: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Electricity Billing System</div>
+    <br>
+    <div class="button-container">
+        <a href="{% url 'customer_login' %}" class="button">Customers</a>
+        <a href="{% url 'meter_reader_home' %}" class="button">Meter Reader</a>
+        <a href="{% url 'admin_home' %}" class="button">Login as Admin</a>
+    </div>
+    <div class="customer-list">
+        <h2>All Customers List</h2>
+        <ol>
+            {% for customer in customers %}
+                <li>{{ customer.name }} - {{ customer.customer_number }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+    
+</body>
+</html>

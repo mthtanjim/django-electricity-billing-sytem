@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .customer-login {
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.1); /* Transparent black background */
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 400px; /* Fixed width */
+    margin: 0 auto; /* Center horizontally */
+  }
+  .customer-login h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: white; /* Text color */
+  }
+  .customer_id {
+    padding: 2rem;
+  }
+
+  .customer-login label {
+    font-weight: bold;
+    color: white; /* Text color */
+  }
+
+  .customer-login input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .customer-login button {
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    transition: background-color 0.3s, font-size 0.3s, box-shadow 0.3s;
+  }
+
+  .customer-login button:hover {
+    background-color: #2980b9;
+    font-size: 1.1rem;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  input[type=text], select {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+  }
+  .customer-login input[type="text"]:focus {
+    border: 1px solid black;
+    box-shadow: 1px 6px 21px 0px rgba(120,36,150,0.75);
+-webkit-box-shadow: 1px 6px 21px 0px rgba(120,36,150,0.75);
+-moz-box-shadow: 1px 6px 21px 0px rgba(120,36,150,0.75);
+    outline: none;
+}
+</style>
+<div>
+  <h2>Customer Login</h2>
+
+  <div class="customer-login">
+    <form method="post" action="{% url 'customer_login' %}">
+      {% csrf_token %}
+      <label for="customer_id">Customer ID:</label>
+      <input type="text" id="customer_id" name="customer_id"/>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  {% if not_found %}
+  <p class="error-message">Customer not found.</p>
+  {% endif %}
+</div>
+
+  
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Electricity Billing System{% endblock %}</title>
+    <style>
+      /* Reset some default styles */
+      body,
+      h3,
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #333;
+        color: #fff;
+      }
+
+      header {
+        background-color: #222;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav ul li {
+        display: inline;
+        margin-right: 15px;
+      }
+
+      main {
+        padding: 50px 0;
+        text-align: center;
+        height: 90%;
+      }
+      .homeBtn {
+        padding: 1rem;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      footer {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        background-color: #222;
+        color: #fff;
+        text-align: center;
+        padding: 40px 0;
+        bottom: 0%;
+        margin-top: 10%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Electricity Billing System</h1>
+      <nav>
+        <ul>
+          <li><a class="homeBtn" href="{% url 'home' %}">Back to Home</a></li>
+          {% if user_type == 'meter_reader' %}
+          <li><a href="{% url 'meter_reader_home' %}">Meter Reader</a></li>
+          {% endif %} {% if user_type == 'admin' %}
+          <li><a href="{% url 'admin_home' %}">Admin</a></li>
+          {% endif %} {% if user_type == 'customer' %}
+          <li><a href="{% url 'customer_home' %}">Customer</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main>{% block content %} {% endblock %}</main>
+    <footer>
+      <p>&copy; 2023 Electricity Billing System</p>
+    </footer>
+  </body>
+</html>

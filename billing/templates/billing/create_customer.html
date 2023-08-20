@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    .customer-form-container {
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 25px 40px 25px 25px;
+      border: 1px solid #00004d;
+      background: #4d4d4d;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-heading {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .customer-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .customer-form label {
+      margin-bottom: 5px;
+    }
+
+    .customer-form input[type="text"],
+    .customer-form input[type="number"] {
+      margin-top: 7px;
+      padding: 8px;
+      width: 100%;
+      margin-bottom: 15px;
+      border: 1px solid #00004d;
+      border-radius: 3px;
+    }
+
+    .submit-button {
+      margin-top: 2rem;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+
+  <h2 class="form-heading">Create Customer</h2>
+  <div class="customer-form-container">
+    <form method="post" class="customer-form">
+      {% csrf_token %}
+      {{ customer_form.as_p }}
+      <button type="submit" class="submit-button">Create Customer</button>
+    </form>
+  </div>
+{% endblock %}
+

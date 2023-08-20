@@ -1,0 +1,154 @@
+<!-- admin_home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="admin-home">
+  <h2>Welcome to the Admin Dashboard</h2>
+
+  <div class="firstClm" >
+    <div>
+      <p >You can new cutomers here</p>
+      <a href="{% url 'create_customer' %}" class="button">Create Customer</a>
+    </div>
+   
+    <div class="rightSide" >
+      <p >You can manage billing units here</p>
+      <form method="post">
+        {% csrf_token %}
+        <label for="unit_price">Unit Price:</label>
+        <input type="number" id="unit_price" name="unit_price" step="0.01" value="{{ unit_price }}">
+        <button type="submit">Update Unit Price</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="customer-table">
+    <h2>Customer Billing Details</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Customer ID</th>
+          <th>Address</th>
+          <th>Meter Reading</th>
+          <th>Due Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for customer in customers %}
+          <tr>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.customer_number }}</td>
+            <td>{{ customer.address }}</td>
+            <td>
+              {% for meter_reading in customer.meterreading_set.all %}
+                {{ meter_reading.meter_reading }} ({{ meter_reading.date }})
+                <br>
+              {% empty %}
+                No meter readings found.
+              {% endfor %}
+            </td>
+            <td>{{ customer.due_amount }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5">No customers found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <style>
+    .admin-home {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+    .rightSide form input {
+      padding: 0.4rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      width: 3.2rem;
+    }
+    .firstClm {
+      background: #3e434a;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      border: 1px solid #404854;
+      background: dark;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+    .firstClm p{ 
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+     
+    }
+    .btn {
+      padding: 0.8rem;
+      background-color: #3498db;
+      color: white;
+    }
+    .btn:hover {
+      background-color: #0098db;
+    }
+    thead tr th{
+      background: #b9c9d1 !important;
+    }
+    thead tr{
+      color: black;
+    }
+    button {
+      padding: 0.6rem 0.5rem;
+      background: #2980B9;
+      color: white;
+    }
+    .button {
+      padding: 0.5rem 1rem;
+      background-color: #3498db;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 0.3rem;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .button:hover {
+      background-color: #2980b9;
+    }
+    .customer-table {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem;
+      align-items: center;
+    }
+
+    .customer-table table {
+      align-items: center;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .customer-table th, .customer-table td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    .customer-table th {
+      background-color: #f2f2f2;
+    }
+
+    @media (max-width: 600px) { 
+      .admin-home {
+        padding-left: 3%;
+        padding-right: 3%;
+      }
+    }
+  </style>
+</div>
+{% endblock %}
