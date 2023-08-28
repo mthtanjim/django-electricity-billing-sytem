@@ -36,6 +36,22 @@ A Django-based web app for electricity billing and customer management.
 2. Create a new branch.
 3. Make changes and submit a pull request.
 
+## Screenshots
+
+### Home Page
+![Home](https://github.com/mthtanjim/django-electricity-billing-sytem/blob/master/electricity%20home.png?raw=true)
+
+### Admin Dashboard
+![Admin](https://github.com/mthtanjim/django-electricity-billing-sytem/blob/master/admin%20ebs.png?raw=true)
+
+### Meter Reader Page
+![Meter Reader](https://github.com/mthtanjim/django-electricity-billing-sytem/blob/master/meter%20reader.png?raw=true)
+
+### Cutoomer Dashboard
+![Meter Reader](https://github.com/mthtanjim/django-electricity-billing-sytem/blob/master/customers.png?raw=true)
+
+
+
 ## License
 
 This project is licensed under the MIT License.
